@@ -12,6 +12,10 @@ body {
   padding: 8px; /* Temporary */
 }
 
+input[type="range"] {
+  position: fixed;
+}
+
 #pages {
   display: grid;
   flex-direction: column;

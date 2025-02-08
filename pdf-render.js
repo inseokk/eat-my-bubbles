@@ -15,56 +15,20 @@ zoomSlider.addEventListener('input', () => {
 window.addEventListener('wheel', evt => {
   const deltaMode = evt.deltaMode;
   let scaleFactor = Math.exp(-evt.deltaY / 100);
-  const isPinchToZoom =
-    evt.ctrlKey &&
-    !this._isCtrlKeyDown &&
-    deltaMode === WheelEvent.DOM_DELTA_PIXEL &&
-    evt.deltaX === 0 &&
-    Math.abs(scaleFactor - 1) < 0.05 &&
-    evt.deltaZ === 0;
-  const origin = [evt.clientX, evt.clientY];
 
-  // evt.preventDefault();
+  // evt.clientX, evt.clientY
 
-  scaleFactor = accumulateFactor(
-    pdf.currentScale,
-    scaleFactor,
-    "_wheelUnusedFactor"
-  );
-  this.updateZoom(null, scaleFactor, origin);
-
-  zoomSlider.value = scaleFactor;
-  pages.style.setProperty('--scale-factor', scaleFactor);
-});
-
-function accumulateFactor(previousScale, factor, prop) {
-  if (factor === 1) {
-    return 1;
+  if (evt.ctrlKey) {
+    evt.preventDefault();
+    
+    zoomSlider.value = clamp(zoomSlider.value * scaleFactor, 0.1, 2);
+    pages.style.setProperty('--scale-factor', zoomSlider.value);
   }
-  // If the direction changed, reset the accumulated factor.
-  if ((this[prop] > 1 && factor < 1) || (this[prop] < 1 && factor > 1)) {
-    this[prop] = 1;
-  }
+}, {passive: false});
 
-  const newFactor =
-    Math.floor(previousScale * factor * this[prop] * 100) /
-    (100 * previousScale);
-  this[prop] = factor / newFactor;
-
-  return newFactor;
+function clamp(x, min, max) {
+  return Math.max(min, Math.min(max, x));
 }
-
-function updateZoom(steps, scaleFactor, origin) {
-  if (pdf.isInPresentationMode) {
-    return;
-  }
-  pdf.updateScale({
-    drawingDelay: 1,
-    steps,
-    scaleFactor,
-    origin,
-  });
-};
 
 displayPDF('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf');
 
