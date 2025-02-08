@@ -1,3 +1,4 @@
+
 const button = document.querySelector(".button");
 function zoomIn(){
   scale += 0.2;
@@ -9,4 +10,4 @@ function zoomOut(){
     renderPage(pageNum);
   }
 }
-<button onclick="changeSize()">Click</button>
+button.addEventListener("click", zoomIn); // attach zoomIn to button click
