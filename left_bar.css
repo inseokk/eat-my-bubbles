@@ -1,6 +1,6 @@
 /* Container for the left bar */
 .left-bar {
-  width: 250px;
+  width: 150px;
   height: 100vh; /* Extend the bar to full page height */
   background-color: #f7f7f7;
   border-right: 1px solid #ccc;
@@ -18,7 +18,7 @@
   transform: translate(-50%, -50%);  /* Centers the container vertically and horizontally */
   display: flex;
   flex-direction: column;
-  gap: 10px;  /* Space between buttons */
+  gap: 30px;  /* Space between buttons */
 }
 
 /* --- Updated Button Styles for Square Icon Buttons --- */
@@ -40,11 +40,11 @@
 
 /* Search Button Styling */
 .left-bar .search-button {
-  background-color: #4285f4;
+  background-color: #00374A;
 }
 
 .left-bar .search-button:hover {
-  background-color: #357ae8;
+  background-color: #014b63;
 }
 
 /* Insert search icon - using Font Awesome's search icon (fa-search) */
@@ -58,11 +58,11 @@
 
 /* History Button Styling */
 .left-bar .history-button {
-  background-color: #34a853;
+  background-color: #00374A;
 }
 
 .left-bar .history-button:hover {
-  background-color: #2c8e46;
+  background-color: #014b63;
 }
 
 /* Insert history icon - using Font Awesome's history icon (fa-history) */
@@ -76,11 +76,11 @@
 
 /* Settings Button Styling (New Button) */
 .left-bar .settings-button {
-  background-color: #fbbc05;  /* Example color */
+  background-color: #00374A;
 }
 
 .left-bar .settings-button:hover {
-  background-color: #e0a800;  /* Slightly darker on hover */
+  background-color: #014b63;  /* Slightly darker on hover */
 }
 
 /* Insert settings icon - using Font Awesome's cog icon (fa-cog) */
