@@ -1,0 +1,171 @@
+/* Left Bar Container */
+.left-bar {
+  width: 125px;               /* Normal width */
+  height: 100vh;              /* Full viewport height */
+  background-color: #f7f7f7;
+  border-right: 1px solid #ccc;
+  padding: 10px;
+  box-sizing: border-box;
+  font-family: sans-serif;
+  position: relative;
+  transition: width 0.3s ease;  /* Smooth transition when minimizing/restoring */
+}
+
+/* Collapsed state: minimized left bar */
+.left-bar.collapsed {
+  width: 40px;                /* Minimized width (adjust as needed) */
+}
+
+/* Collapse Button Styling */
+.collapse-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1100;
+  background-color: #00374A;
+  color: #ffffff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.collapse-button:hover {
+  background-color: #014b63;
+}
+
+/* Container for the button group */
+.button-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Base styling for all buttons in the left bar */
+.left-bar button {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border: none;
+  border-radius: 8px;
+  background-color: #00374A;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.left-bar button:hover {
+  background-color: #014b63;
+}
+
+/* Styling for Material Symbols Outlined icons inside buttons */
+.material-symbols-outlined {
+  font-size: 24px;
+  line-height: 60px; /* Centers icon vertically within the 60px-high button */
+}
+
+/* (Optional) Page Navigation Styling */
+.page-navigation {
+  margin-top: 20px;
+}
+
+/* Search Button Styling */
+.left-bar .search-button {
+  background-color: #00374A;
+}
+
+.left-bar .search-button:hover {
+  background-color: #014b63;
+}
+
+/* Insert search icon using Google Material Symbols Outlined */
+.left-bar .search-button::before {
+  content: "search";  
+  font-family: "Material Symbols Outlined";
+  font-size: 40px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+/* home Button Styling */
+.left-bar .home-button {
+  background-color: #00374A;
+}
+
+.left-bar .home-button:hover {
+  background-color: #014b63;
+}
+
+/* Insert home icon */
+.left-bar .home-button::before {
+  content: "home";  
+  font-family: "Material Symbols Outlined";
+  font-weight: 900;
+  font-size: 40px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+.left-bar .view-button {
+  background-color: #00374A;
+}
+
+.left-bar .view-button:hover {
+  background-color: #014b63;  /* Slightly darker on hover */
+}
+
+.left-bar .view-button::before {
+  content: "view_agenda";
+  font-family: "Material Symbols Outlined";
+  font-weight: 900;
+  font-size: 40px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+/* Settings Button Styling */
+.left-bar .settings-button {
+  background-color: #00374A;
+}
+
+.left-bar .settings-button:hover {
+  background-color: #014b63;  /* Slightly darker on hover */
+}
+
+/* Insert settings icon */
+.left-bar .settings-button::before {
+  content: "settings";  /* Use lowercase to match Material Symbols */
+  font-family: "Material Symbols Outlined";
+  font-weight: 900;
+  font-size: 40px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+/* --- End of Updated Button Styles --- */
+
+/* Page Navigation Preview Styling */
+.left-bar .page-navigation {
+  margin-bottom: 20px;
+}
+
+.left-bar .page-navigation .page-preview {
+  display: block;
+  width: 100%;
+  margin-bottom: 10px;
+  border: 1px solid #ddd;
+  border-radius: 0; /* Square corners for page previews remain unchanged */
+  overflow: hidden;
+}
+
+.left-bar .page-navigation .page-preview img {
+  width: 100%;
+  display: block;
+}

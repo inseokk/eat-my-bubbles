@@ -17,9 +17,13 @@
   <title>Test</title>
 </head>
 <body>
-  <button onclick="createPdf()">Create PDF</button>
-  <!-- <embed id="pdf" src="" width="500" height="600" type="application/pdf"> -->
-  <canvas id="canvas" width="500" height="600"></canvas>
-  <div id="textlayer"></div>
+  <div class="fixed">
+    <input type="range" id="zoom" min="0.1" max="2" step="0.001">
+    <p><span id="page-num" style="color: white"></span></p>
+    <div class="tooltip" style="opacity: 0">I am a tooltip</div>
+  </div>
+  <div id="pdf-viewer">
+    <div id="pages"></div>
+  </div>
 </body>
 </html>
