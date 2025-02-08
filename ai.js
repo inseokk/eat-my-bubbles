@@ -1,8 +1,12 @@
+function random(min, max) {
+  return Math.random() * (max - min) + min;
+}
+
 function askAI(message) {
   return new Promise(res => {
     setTimeout(() => {
-      res('Test');
-    }, 1000);
+      res('Pretend this is the response you get from OpenAI <3');
+    }, random(500, 2000));
   });
 }
 

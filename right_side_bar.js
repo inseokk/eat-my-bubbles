@@ -1,11 +1,28 @@
+const chatSection = document.querySelector('.chat-section');
+const chatHeader = chatSection.querySelector('.chat-header');
+const chatInputSection = chatSection.querySelector('.chat-input-section');
+
+const actionButtonContainer = chatInputSection.querySelector('.action-buttons');
+const inputContainer = chatInputSection.querySelector('.input-container');
+const textarea = inputContainer.querySelector('.chat-input');
+
+const filter = document.querySelector('.filter');
+const discussionItems = document.querySelectorAll('.discussion-item');
+const actionButtons = document.querySelectorAll('.action-button');
+
+const messages = document.querySelector('.messages');
+
+const MIN_CHAT = 250;
+const MAX_CHAT = 600;
+
 // Filter dropdown
-document.querySelector('.filter').addEventListener('click', function () {
+filter.addEventListener('click', function () {
   // Toggle filter options (Not implemented yet)
   console.log('Filter clicked');
 });
 
 // Discussion items
-document.querySelectorAll('.discussion-item').forEach(item => {
+discussionItems.forEach(item => {
   item.addEventListener('click', function () {
     // Handle discussion item click (Not implemented yet)
     console.log('Discussion item clicked');
@@ -13,7 +30,7 @@ document.querySelectorAll('.discussion-item').forEach(item => {
 });
 
 // Action buttons
-document.querySelectorAll('.action-button').forEach(button => {
+actionButtons.forEach(button => {
   button.addEventListener('click', function () {
     // Handle action button click (Not implemented yet)
     console.log('Action button clicked:', this.textContent);
@@ -27,9 +44,7 @@ let startHeight;
 
 // Adjust chat input
 function adjustChatInputSection(chatSection) {
-  const chatHeader = chatSection.querySelector('.chat-header');
-  const chatInputSection = chatSection.querySelector('.chat-input-section');
-  const availableHeight = chatSection.offsetHeight - chatHeader.offsetHeight - 32; // 32px for padding
+  const availableHeight = chatSection.offsetHeight - chatHeader.offsetHeight + 50;
 
   // Size constraint
   const minInputHeight = 100; // Min height
@@ -39,17 +54,13 @@ function adjustChatInputSection(chatSection) {
   chatInputSection.style.height = `${newHeight}px`;
 
   // Adjust textarea height
-  const actionButtons = chatInputSection.querySelector('.action-buttons');
-  const inputContainer = chatInputSection.querySelector('.input-container');
-  const textarea = inputContainer.querySelector('.chat-input');
-
-  const textareaHeight = newHeight - actionButtons.offsetHeight - 20; // 20px gaps
+  const textareaHeight = newHeight - actionButtonContainer.offsetHeight - 40;
   textarea.style.height = `${textareaHeight}px`;
 }
 
-document.querySelector('.chat-section').addEventListener('mousedown', function (e) {
+chatSection.addEventListener('mousedown', function (e) {
   // Only start resizing if clicking near the top border
-  if (e.offsetY <= 10) {
+  if (e.target == chatHeader) {
     isResizing = true;
     startY = e.pageY;
     startHeight = parseInt(document.defaultView.getComputedStyle(this).height, 10);
@@ -76,7 +87,7 @@ document.addEventListener('mousemove', function (e) {
   const newHeight = startHeight - (e.pageY - startY);
 
   // Apply constraints
-  if (newHeight >= 250 && newHeight <= 500) {
+  if (newHeight >= MIN_CHAT && newHeight <= MAX_CHAT) {
     chatSection.style.height = `${newHeight}px`;
     adjustChatInputSection(chatSection);
   }
@@ -95,11 +106,7 @@ document.addEventListener('mouseup', function () {
   }
 });
 
-// Initial adjustment of chat input section
-window.addEventListener('load', function () {
-  const chatSection = document.querySelector('.chat-section');
-  adjustChatInputSection(chatSection);
-});
+adjustChatInputSection(chatSection);
 
 // Handle message submission
 function submitMessage() {
@@ -107,9 +114,26 @@ function submitMessage() {
   const message = input.value.trim();
   if (message) {
     console.log('Submitted:', message);
-    askAI(message); /* TODO! */
+    chatSection.style.height = `${MAX_CHAT}px`;
+    adjustChatInputSection(chatSection);
+    createUserMessage(message);
+    askAI(message).then(createAIMessage);
     input.value = '';
   }
+}
+
+function createUserMessage(message) {
+  const elem = document.createElement('div');
+  elem.classList.add('user-message');
+  elem.innerText = message;
+  messages.appendChild(elem);
+}
+
+function createAIMessage(message) {
+  const elem = document.createElement('div');
+  elem.classList.add('ai-message');
+  elem.innerHTML = `<div class="logo"></div><div class="ai-message-content">${message}</div>`;
+  messages.appendChild(elem);
 }
 
 // Handle chat input submission with button
