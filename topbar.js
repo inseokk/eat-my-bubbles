@@ -1,20 +1,21 @@
+const ZOOM_FACTOR = 0.15;
 
-const button = document.querySelector(".button");
-function zoomIn(){
-  scale += 0.2;
-  renderPage(pageNum);
-}
-function zoomOut(){
-  if (scale > 0.4){
-    scale -= 0.2;
-    renderPage(pageNum);
-  }
-}
-button.addEventListener("click", zoomIn); // attach zoomIn to button click
+const zoomIn = document.getElementById('zoom-in');
+const zoomOut = document.getElementById('zoom-out');
 
-const highlightBar = document.querySelector(".highlight-bar");
-highlightBar.addEventListener("click", appear(event)); 
-
-function appear(event){
-  console.log('mouse coordinates:', event.clientX, event.clientY);
+function getDocumentMiddle() {
+  return pdfViewer.scrollTop + (pdfViewer.clientHeight / 2)
 }
+
+function roundBy(x, step, offset) {
+  return Math.round((x - offset) / step) * step + offset;
+}
+
+zoomIn.addEventListener('click', () => {
+  const scale = roundBy(pdfScale + ZOOM_FACTOR, 0.15, 10) / pdfScale;
+  zoom(scale, null, getDocumentMiddle());
+});
+zoomOut.addEventListener('click', () => {
+  const scale = roundBy(pdfScale - ZOOM_FACTOR, 0.15, 10) / pdfScale;
+  zoom(scale, null, getDocumentMiddle());
+});
