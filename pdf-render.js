@@ -15,7 +15,7 @@ function displayPDF(url) {
     pdf.getPage(pageNumber).then(page => {
       console.log('Page loaded');
 
-      var scale = 0.75;
+      var scale = 1;
       var viewport = page.getViewport({scale: scale});
       var outputScale = window.devicePixelRatio || 1;
 

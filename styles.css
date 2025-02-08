@@ -1,3 +1,14 @@
 embed, canvas, object {
   outline: 1px solid black;
 }
+
+.page {
+  position: relative;
+  width: 500px;
+  height: 600px;
+}
+
+.page canvas, .page #textlayer {
+  width: 100%;
+  height: 100%;
+}
