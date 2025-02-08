@@ -1,21 +1,21 @@
+const ZOOM_FACTOR = 0.15;
 
-const button = document.querySelector(".button");
-function zoomIn(){
-  scale += 0.2;
-  renderPage(pageNum);
+const zoomIn = document.getElementById('zoom-in');
+const zoomOut = document.getElementById('zoom-out');
+
+function getDocumentMiddle() {
+  return pdfViewer.scrollTop + (pdfViewer.clientHeight / 2)
 }
-function zoomOut(){
-  if (scale > 0.4){
-    scale -= 0.2;
-    renderPage(pageNum);
-  }
+
+function roundBy(x, step, offset) {
+  return Math.round((x - offset) / step) * step + offset;
 }
-button.addEventListener("click", zoomIn); // attach zoomIn to button click
 
-// const highlightBar = document.querySelector(".highlight-bar");
-// highlightBar.addEventListener("click", appear); 
-
-// function appear(){
-//   console.log('mouse coordinates:', event.clientX, event.clientY);
-//   highlightBar.
-// }
+zoomIn.addEventListener('click', () => {
+  const scale = roundBy(pdfScale + ZOOM_FACTOR, 0.15, 10) / pdfScale;
+  zoom(scale, null, getDocumentMiddle());
+});
+zoomOut.addEventListener('click', () => {
+  const scale = roundBy(pdfScale - ZOOM_FACTOR, 0.15, 10) / pdfScale;
+  zoom(scale, null, getDocumentMiddle());
+});

@@ -6,13 +6,11 @@
 }
 
 .sidebar {
-  position: fixed;
-  right: 0;
-  top: 50px;
   width: 380px;
-  height: 100vh;
-  background: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  height: 100%;
+  flex: 0 0 380px;
+  background-color: white;
+  box-shadow: -4px 0 8px #00000044;
   display: flex;
   flex-direction: column;
   transition: all 0.3s ease;
@@ -34,7 +32,7 @@
 
 .filter {
   padding: 12px 16px;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   border-bottom: 1px solid #eee;
   font-size: 16px;
   color: #333;
@@ -58,7 +56,7 @@
 }
 
 .discussion-item:hover {
-  background: #f8f9fa;
+  background-color: #f8f9fa;
 }
 
 .discussion-title {
@@ -91,7 +89,7 @@
 }
 
 .comment-count {
-  background: #eee;
+  background-color: #eee;
   padding: 2px 6px;
   border-radius: 12px;
   font-size: 12px;
@@ -99,29 +97,29 @@
 }
 
 .chat-section {
-  border-top: 1px solid #eee;
-  padding: 16px;
-  background: #0a2647;
   color: white;
   resize: vertical;
   overflow: auto;
-  min-height: 250px;
-  max-height: 500px;
+  /* min-height: 250px;
+  max-height: 500px; */
+  padding-inline: 8px;
   position: relative;
-  cursor: ns-resize;
 }
 
 .chat-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 16px;
+  background-color: #0a2647;
+  padding: 16px;
+  border-radius: 16px 16px 0 0px;
+  cursor: ns-resize;
 }
 
 .logo {
   width: 32px;
   height: 32px;
-  background: #ccc;
+  background-color: #ccc;
   border-radius: 50%;
 }
 
@@ -138,7 +136,9 @@
   display: flex;
   flex-direction: column;
   gap: 12px;
-  margin-bottom: 25px;
+  padding: 12px;
+  justify-content: flex-end;
+  /* background-color: #eee; */
 }
 
 .action-buttons {
@@ -148,34 +148,35 @@
 
 .action-button {
   padding: 8px 16px;
-  background: #f5f5f5;
+  background-color: #f5f5f5;
   border: none;
   border-radius: 20px;
   color: #0a2647;
   font-size: 14px;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .action-button:hover {
-  background: #e5e5e5;
+  background-color: #e5e5e5;
 }
 
 .chat-input {
   width: 100%;
+  max-height: 120px;
   padding: 12px;
   border: 1px solid #ccc;
   border-radius: 8px;
   font-size: 14px;
   resize: none;
-  background: white;
+  background-color: white;
 }
 
 .submit-button {
   position: absolute;
   right: 8px;
   bottom: 8px;
-  background: #0a2647;
+  background-color: #0a2647;
   border: none;
   border-radius: 50%;
   width: 36px;
@@ -184,17 +185,45 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: background-color 0.2s;
 }
 
 .submit-button:hover {
-  background: #153b6b;
+  background-color: #153b6b;
 }
 
 .arrow-icon {
   width: 20px;
   height: 20px;
   fill: white;
+}
+
+#dropdown-chat {
+  float: right;
+}
+
+.messages {
+  height: 100%;
+  color: black;
+  font-size: 0.9rem;
+}
+
+.user-message {
+  margin-bottom: 16px;
+  padding: 8px;
+  background-color: #efefef;
+  border-radius: 8px;
+}
+
+.ai-message {
+  margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+}
+
+.ai-message .logo {
+  flex: 0 0 32px;
 }
 
 .filter-dropdown {

@@ -11,18 +11,16 @@ const MAX_SCALE = 2.0;
 const pdfViewer = document.getElementById('pdf-viewer');
 const pages = document.getElementById('pages');
 const pageNumElem = document.getElementById('page-num');
+const pageTotalElem = document.getElementById('page-total');
 const tooltip = document.querySelector('.tooltip');
 
 /* ZOOM FUNCTIONALITY */
-const zoomSlider = document.getElementById('zoom');
-zoomSlider.addEventListener('input', () => {
-  pdfScale = zoomSlider.value;
-  pdfViewer.style.setProperty('--scale-factor', pdfScale);
-  updatePageNumber();
-});
+const zoomElem = document.getElementById('zoom');
 
 /* TEMPORARY SOLUTION: */
 var mousedownEvt = null;
+
+window.addEventListener('resize', updateTooltip);
 
 pdfViewer.addEventListener('mousedown', evt => {
   mousedownEvt = evt;
@@ -31,9 +29,7 @@ pdfViewer.addEventListener('mousedown', evt => {
 pdfViewer.addEventListener('click', evt => {
   // console.log(evt);
 
-  if (document.getSelection().toString().length > 0) {
-    tooltip.style.opacity = 1;
-  }
+  tooltip.style.opacity = document.getSelection().toString().length ? 1 : 0;
 
   if (evt.clientX != mousedownEvt.clientX || evt.clientY != mousedownEvt.clientY) return;
 
@@ -51,26 +47,32 @@ pdfViewer.addEventListener('click', evt => {
   page.querySelector('.annotations').appendChild(dot);
 });
 
-document.addEventListener('selectionchange', evt => {
+document.addEventListener('selectionchange', updateTooltip);
+
+function updateTooltip() {
   const selection = document.getSelection();
+  if (!selection) return;
   // console.log(selection);
   const text = selection.toString().replaceAll('\n', '');
+  if (!selection.anchorNode) return;
   const anchor = selection.anchorNode.parentElement;
   const anchorRect = anchor.getClientRects()[0];
   const extent = selection.extentNode.parentElement;
   const extentRect = extent.getClientRects()[0];
   const page = [...pages.childNodes].find(page => page.contains(anchor));
+  if (!page) return;
   const pageRect = page.getClientRects()[0];
   const x = Math.min(anchorRect.x, extentRect.x) - pageRect.x;
   const y = Math.min(anchorRect.y, extentRect.y) - pageRect.y;
+
+  const font = anchor.font
   
   tooltip.style.top = `${Math.min(anchorRect.y, extentRect.y) - 32}px`;
   tooltip.style.left = `${Math.min(anchorRect.x, extentRect.x) + (selection.anchorOffset + selection.extentOffset)*2}px`;
-  tooltip.innerText = text;
   // tooltip.style.opacity = 1;
 
   // console.log('Selected text:', selectedText);
-});
+}
 
 pdfViewer.addEventListener('wheel', evt => {
   const deltaMode = evt.deltaMode;
@@ -87,7 +89,7 @@ pdfViewer.addEventListener('wheel', evt => {
   }
 
   updatePageNumber();
-}, {passive: false});
+});
 
 function zoom(scale, originX, originY) {
   pdfScale *= scale;
@@ -97,7 +99,7 @@ function zoom(scale, originX, originY) {
   } else {
     pdfScale = clamp(pdfScale, MIN_SCALE, MAX_SCALE);
   }
-  zoomSlider.value = pdfScale;
+  zoomElem.innerText = +(pdfScale * 100).toFixed(2);
 }
 
 function clamp(x, min, max) {
@@ -105,7 +107,7 @@ function clamp(x, min, max) {
 }
 
 function updatePageNumber() {
-  pageNumElem.innerText = `[${getPageNumber()} / ${pdf.numPages}]`;
+  pageNumElem.innerText = getPageNumber();
 }
 
 function getPageNumber() {
@@ -130,6 +132,7 @@ function displayPDF(url) {
   var loadingTask = pdfjsLib.getDocument(url);
   loadingTask.promise.then(_pdf => {
     pdf = _pdf;
+    pageTotalElem.innerText = pdf.numPages;
     for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
       pdf.getPage(pageNumber).then(page => {
         // console.log('Page', pageNumber, 'loading');
