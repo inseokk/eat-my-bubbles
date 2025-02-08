@@ -7,6 +7,18 @@
   padding: 20px;
   box-sizing: border-box;
   font-family: sans-serif;
+  position: relative; /* Needed for absolute positioning of button group */
+}
+
+/* Container for the button group */
+.button-group {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);  /* Centers the container vertically and horizontally */
+  display: flex;
+  flex-direction: column;
+  gap: 10px;  /* Space between buttons */
 }
 
 /* --- Updated Button Styles for Square Icon Buttons --- */
@@ -16,10 +28,10 @@
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 40px;  /* Fixed square width */
-  height: 40px; /* Fixed square height */
+  width: 60px;  /* Fixed square width */
+  height: 60px; /* Fixed square height */
   border: none;
-  border-radius: 0; /* Square corners */
+  border-radius: 8px; /* Rounded corners for a softer look */
   cursor: pointer;
   transition: background-color 0.3s ease;
   background: none;
@@ -62,6 +74,24 @@
   color: #ffffff;
 }
 
+/* Settings Button Styling (New Button) */
+.left-bar .settings-button {
+  background-color: #fbbc05;  /* Example color */
+}
+
+.left-bar .settings-button:hover {
+  background-color: #e0a800;  /* Slightly darker on hover */
+}
+
+/* Insert settings icon - using Font Awesome's cog icon (fa-cog) */
+.left-bar .settings-button::before {
+  content: "\f013";  /* Font Awesome Unicode for cog icon */
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  font-size: 20px;
+  color: #ffffff;
+}
+
 /* --- End of Updated Button Styles --- */
 
 /* Page Navigation Preview Styling */
@@ -74,7 +104,7 @@
   width: 100%;
   margin-bottom: 10px;
   border: 1px solid #ddd;
-  border-radius: 0; /* Square corners */
+  border-radius: 0; /* Square corners for page previews remain unchanged */
   overflow: hidden;
 }
 
