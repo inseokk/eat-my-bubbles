@@ -1,26 +1,71 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Left Bar</title>
-  <link rel="stylesheet" href="left_bar.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Eat My Bubbles - Sidebar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet" />
+  <script src="left_bar.js"></script>
+  <link rel="stylesheet" href="left_bar.css" />
 </head>
 <body>
-  <div class="left-bar">
-    <button class="collapse-button">
-      <span class="material-symbols-outlined">chevron_left</span>
-    </button>
-    <div class="button-group">
-      <button class="home-button"></button>
-      <button class="search-button"></button>
-      <button class="view-button"></button>
-      <button class="settings-button"></button>
-    </div>
+  <div class="left-bar" id="mySidebar">
     <div class="page-navigation">
-      <!-- page preview images here -->
+      <div class="page-preview-container">
+        <div class="page-preview"></div>
+        <div class="preview-number">1</div>
+      </div>
+      <div class="page-preview-container">
+        <div class="page-preview"></div>
+        <div class="preview-number">2</div>
+      </div>
+      <div class="page-preview-container">
+        <div class="page-preview"></div>
+        <div class="preview-number">3</div>
+      </div>
     </div>
   </div>
+  <button id="toggleButton" class="toggle-button" aria-label="Toggle sidebar" onclick="toggleSidebar()">
+    <span class="material-symbols-outlined">chevron_left</span>
+  </button>
+  <script>
+    function toggleSidebar() {
+    const sidebar = document.getElementById("mySidebar");
+    const toggleButton = document.getElementById("toggleButton");
+    const mainContent = document.getElementById("main");
+
+    if (sidebar.classList.contains("collapsed")) {
+      sidebar.classList.remove("collapsed");
+      toggleButton.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
+      if (mainContent) {
+        mainContent.style.marginLeft = sidebar.offsetWidth + "px";
+      }
+    } else {
+      sidebar.classList.add("collapsed");
+      toggleButton.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+      if (mainContent) {
+        mainContent.style.marginLeft = "0";
+      }
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const sidebar = document.getElementById("mySidebar");
+    const toggleButton = document.getElementById("toggleButton");
+    const mainContent = document.getElementById("main");
+
+    if (sidebar.classList.contains("collapsed")) {
+      toggleButton.innerHTML = '<span class="material-symbols-outlined">menu</span>';
+      if (mainContent) {
+        mainContent.style.marginLeft = "0";
+      }
+    } else {
+      toggleButton.innerHTML = '<span class="material-symbols-outlined">chevron_left</span>';
+      if (mainContent) {
+        mainContent.style.marginLeft = sidebar.offsetWidth + "px";
+      }
+    }
+  });
+  </script>
 </body>
 </html>

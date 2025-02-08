@@ -1,37 +1,110 @@
-/* Left Bar Container */
+.toggle-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  width: 40px;
+  height: 40px;
+  background-color: #00374A;
+  border: none;
+  color: #fff;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+}
+.toggle-button:hover {
+  background-color: #014b63;
+}
 .left-bar {
-  width: 125px;               /* Normal width */
-  height: 100vh;              /* Full viewport height */
+  position: fixed;
+  top: 60px;
+  left: 0;
+  width: 200px;
+  height: calc(100vh - 60px);
   background-color: #f7f7f7;
   border-right: 1px solid #ccc;
-  padding: 10px;
+  padding: 20px;
   box-sizing: border-box;
   font-family: sans-serif;
-  position: relative;
-  transition: width 0.3s ease;  /* Smooth transition when minimizing/restoring */
+  transition: width 0.3s ease;
 }
-
-/* Collapsed state: minimized left bar */
 .left-bar.collapsed {
-  width: 40px;                /* Minimized width (adjust as needed) */
+  width: 0;
+  padding: 10px 0;
+  overflow: hidden;
 }
-
+.page-navigation {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.page-preview-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
+.page-preview {
+  width: 170px;
+  height: 220px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.2s ease;
+}
+.page-preview:hover {
+  transform: scale(1.05);
+}
+.preview-number {
+  font-size: 12px;
+  color: #333;
+}
+#main {
+  margin-left: 125px;
+  transition: margin-left 0.3s ease;
+  padding: 20px;
+}
 /* Collapse Button Styling */
 .collapse-button {
   position: absolute;
   top: 10px;
-  right: 10px;
+  right: -25px;
   z-index: 1100;
+  width: 50px;
+  height: 25px;
   background-color: #00374A;
   color: #ffffff;
   border: none;
-  padding: 4px 8px;
-  border-radius: 4px;
+  border-radius: 50% 0 0 50%;  /* Creates a clean semicircle on the left side */
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
 .collapse-button:hover {
+  background-color: #014b63;
+}
+
+/* Open Button Styling (for when the sidebar is collapsed) */
+.openbtn {
+  font-size: 20px;
+  cursor: pointer;
+  background-color: #00374A;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  transition: background-color 0.3s ease;
+  /* Position this button as desired. For example, fixed at top left: */
+  position: fixed;
+  top: 10px;
+  left: 10px;
+}
+
+.openbtn:hover {
   background-color: #014b63;
 }
 
@@ -94,7 +167,7 @@
   display: inline-block;
 }
 
-/* home Button Styling */
+/* Home Button Styling */
 .left-bar .home-button {
   background-color: #00374A;
 }
@@ -113,6 +186,7 @@
   display: inline-block;
 }
 
+/* View Button Styling */
 .left-bar .view-button {
   background-color: #00374A;
 }
@@ -149,8 +223,6 @@
   display: inline-block;
 }
 
-/* --- End of Updated Button Styles --- */
-
 /* Page Navigation Preview Styling */
 .left-bar .page-navigation {
   margin-bottom: 20px;
@@ -158,7 +230,7 @@
 
 .left-bar .page-navigation .page-preview {
   display: block;
-  width: 100%;
+  width: 165px;
   margin-bottom: 10px;
   border: 1px solid #ddd;
   border-radius: 0; /* Square corners for page previews remain unchanged */
