@@ -54,8 +54,8 @@ function updateTooltip() {
   if (!selection) return;
   // console.log(selection);
   const text = selection.toString().replaceAll('\n', '');
+  if (!selection.anchorNode) return;
   const anchor = selection.anchorNode.parentElement;
-  if (!anchor) return;
   const anchorRect = anchor.getClientRects()[0];
   const extent = selection.extentNode.parentElement;
   const extentRect = extent.getClientRects()[0];
@@ -89,7 +89,7 @@ pdfViewer.addEventListener('wheel', evt => {
   }
 
   updatePageNumber();
-}, {passive: false});
+});
 
 function zoom(scale, originX, originY) {
   pdfScale *= scale;

@@ -10,9 +10,10 @@
   height: 100%;
   flex: 0 0 380px;
   background: white;
-  box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: -4px 0 8px #00000044;
   display: flex;
   flex-direction: column;
+  z-index: 2;
 }
 
 .header {

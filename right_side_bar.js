@@ -107,6 +107,7 @@ function submitMessage() {
   const message = input.value.trim();
   if (message) {
     console.log('Submitted:', message);
+    askAI(message); /* TODO! */
     input.value = '';
   }
 }
