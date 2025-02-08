@@ -15,27 +15,27 @@ const messages = document.querySelector('.messages');
 const MIN_CHAT = 250;
 const MAX_CHAT = 600;
 
-// Filter dropdown
-filter.addEventListener('click', function () {
-  // Toggle filter options (Not implemented yet)
-  console.log('Filter clicked');
-});
+// // Filter dropdown
+// filter.addEventListener('click', function () {
+//   // Toggle filter options (Not implemented yet)
+//   console.log('Filter clicked');
+// });
 
-// Discussion items
-discussionItems.forEach(item => {
-  item.addEventListener('click', function () {
-    // Handle discussion item click (Not implemented yet)
-    console.log('Discussion item clicked');
-  });
-});
+// // Discussion items
+// discussionItems.forEach(item => {
+//   item.addEventListener('click', function () {
+//     // Handle discussion item click (Not implemented yet)
+//     console.log('Discussion item clicked');
+//   });
+// });
 
-// Action buttons
-actionButtons.forEach(button => {
-  button.addEventListener('click', function () {
-    // Handle action button click (Not implemented yet)
-    console.log('Action button clicked:', this.textContent);
-  });
-});
+// // Action buttons
+// actionButtons.forEach(button => {
+//   button.addEventListener('click', function () {
+//     // Handle action button click (Not implemented yet)
+//     console.log('Action button clicked:', this.textContent);
+//   });
+// });
 
 // Make the chat section resizable
 let isResizing = false;
@@ -162,27 +162,27 @@ function setupFilter(filterButton, filterDropdown, filterOptions, filterText, fi
   });
 
   if (filterOptions) {
-      filterOptions.forEach(option => {
-          option.addEventListener('click', (e) => {
-              e.stopPropagation(); // Stop event from bubbling up
-              if (filterText) {
-                  filterText.textContent = option.textContent;
-              } else if (filterButton.querySelector('span')) {
-                  filterButton.querySelector('span').textContent = option.textContent;
-              } else {
-                  filterButton.textContent = option.textContent;
-                  if (filterArrow) {
-                      filterButton.appendChild(filterArrow.cloneNode(true));
-                  }
-              }
-              
-              // Explicitly close the dropdown
-              filterDropdown.classList.remove('active');
-              if (filterArrow) {
-                  filterArrow.style.transform = '';
-              }
-          });
+    filterOptions.forEach(option => {
+      option.addEventListener('click', (e) => {
+        e.stopPropagation(); // Stop event from bubbling up
+        if (filterText) {
+          filterText.textContent = option.textContent;
+        } else if (filterButton.querySelector('span')) {
+          filterButton.querySelector('span').textContent = option.textContent;
+        } else {
+          filterButton.textContent = option.textContent;
+          if (filterArrow) {
+            filterButton.appendChild(filterArrow.cloneNode(true));
+          }
+        }
+
+        // Explicitly close the dropdown
+        filterDropdown.classList.remove('active');
+        if (filterArrow) {
+          filterArrow.style.transform = '';
+        }
       });
+    });
   }
 }
 
@@ -205,20 +205,22 @@ setupFilter(fullscreenFilterButton, fullscreenFilterDropdown, fullscreenFilterOp
 
 // Global click handler to close all dropdowns when clicking outside
 document.addEventListener('click', (e) => {
+  console.log(e.target, e);
+
   // Handle sidebar filter
   if (sidebarFilter && !sidebarFilter.contains(e.target)) {
-      sidebarFilterDropdown?.classList.remove('active');
-      if (sidebarFilterArrow) {
-          sidebarFilterArrow.style.transform = '';
-      }
+    sidebarFilterDropdown?.classList.remove('active');
+    if (sidebarFilterArrow) {
+      sidebarFilterArrow.style.transform = '';
+    }
   }
-  
+
   // Handle fullscreen filter
   if (fullscreenFilterButton && !fullscreenFilterButton.contains(e.target)) {
-      fullscreenFilterDropdown?.classList.remove('active');
-      if (fullscreenFilterArrow) {
-          fullscreenFilterArrow.style.transform = '';
-      }
+    fullscreenFilterDropdown?.classList.remove('active');
+    if (fullscreenFilterArrow) {
+      fullscreenFilterArrow.style.transform = '';
+    }
   }
 });
 

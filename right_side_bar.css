@@ -565,7 +565,7 @@
   padding: 24px;
 }
 
-.action-buttons {
+/* .action-buttons {
   display: flex;
   gap: 12px;
   margin-bottom: 16px;
@@ -583,7 +583,7 @@
 
 .action-button:hover {
   background: #e5e5e5;
-}
+} */
 
 .input-container {
   position: relative;

@@ -10,7 +10,7 @@
   <script src="pdf.worker.min.js"></script>
 
   <!-- Our JavaScript Files -->
-   <script src="ENV.js"></script>
+  <script src="ENV.js"></script>
   <script src="pdf-render.js" defer></script>
   <script src="topbar.js" defer></script>
   <script src="right_side_bar.js" defer></script>
@@ -63,16 +63,23 @@
     <div class="sidebar">
       <div class="header">
         <h1>Discussion</h1>
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <svg class="expand-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
           <path d="M7 17L17 7M17 7H7M17 7V17" />
         </svg>
       </div>
 
       <div class="filter">
-        Filter
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <span class="filter-text">Filter</span>
+        <svg class="filter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
           <path d="M6 9l6 6 6-6" />
         </svg>
+        <div class="filter-dropdown">
+          <div class="filter-option">Announcements</div>
+          <div class="filter-option">Unread</div>
+          <div class="filter-option">Instructor responses</div>
+        </div>
       </div>
 
       <div class="discussion-list">
@@ -91,7 +98,7 @@
             <span class="comment-count">3</span>
           </div>
         </div>
-        <!-- Repeated items for demonstration -->
+        <!-- Repeated discussion item -->
         <div class="discussion-item">
           <div class="discussion-title">Searching a Sorted Array</div>
           <div class="discussion-preview">
@@ -131,6 +138,98 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Fullscreen container -->
+    <div class="fullscreen-container">
+      <!-- Left section -->
+      <div class="discussion-section">
+        <div class="discussion-header">
+          <div class="header-title">
+            <h1>Discussion</h1>
+            <button class="close-button">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 18L18 6M6 6l12 12" />
+              </svg>
+            </button>
+          </div>
+          <div class="filter-wrapper">
+            <button class="filter-button">
+              Filter
+              <svg class="filter-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="2">
+                <path d="M6 9l6 6 6-6" />
+              </svg>
+            </button>
+            <div class="filter-dropdown">
+              <div class="filter-option">Announcements</div>
+              <div class="filter-option">Unread</div>
+              <div class="filter-option">Instructor responses</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="discussion-content">
+          <!-- Discussion items will be cloned here -->
+        </div>
+      </div>
+
+      <!-- Middle section - Empty state -->
+      <div class="empty-state">
+        <div class="conversation-selector">
+          <svg class="empty-state-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" />
+          </svg>
+          <div class="empty-state-text">Select a conversation</div>
+        </div>
+        <div class="new-discussion-form">
+          <input type="text" placeholder="Title" class="title-input">
+          <div class="editor-toolbar">
+            <button class="toolbar-btn">B</button>
+            <button class="toolbar-btn">I</button>
+            <button class="toolbar-btn">U</button>
+            <button class="toolbar-btn">&lt;&gt;</button>
+          </div>
+          <textarea placeholder="Enter your comments and questions" class="discussion-textarea"></textarea>
+          <div class="form-footer">
+            <div class="tag-buttons">
+              <button class="tag-btn technical">Technical</button>
+              <button class="tag-btn style">Style</button>
+              <button class="tag-btn lecture">Lecture</button>
+            </div>
+            <button class="post-btn">Post</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right section -->
+      <div class="chat-section-fullscreen">
+        <div class="chat-header-fullscreen">
+          <img src="/api/placeholder/24/24" alt="Verca Logo" />
+          <h2>Ask Verca</h2>
+        </div>
+
+        <div class="chat-content">
+          <div class="chat-input-area">
+            <div class="action-buttons">
+              <button class="action-button">Summarize</button>
+              <button class="action-button">Explain key concepts</button>
+              <button class="action-button">Relate to previous lecture</button>
+            </div>
+
+            <div class="input-container">
+              <textarea class="chat-input" placeholder="start typing..."></textarea>
+              <button class="submit-button">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                  <path d="M5 12h14M12 5l7 7-7 7" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
   </main>
   </div>
 </body>
