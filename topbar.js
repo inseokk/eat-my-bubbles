@@ -11,3 +11,11 @@ function zoomOut(){
   }
 }
 button.addEventListener("click", zoomIn); // attach zoomIn to button click
+
+// const highlightBar = document.querySelector(".highlight-bar");
+// highlightBar.addEventListener("click", appear); 
+
+// function appear(){
+//   console.log('mouse coordinates:', event.clientX, event.clientY);
+//   highlightBar.
+// }
