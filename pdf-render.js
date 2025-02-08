@@ -67,7 +67,7 @@ function updateTooltip() {
 
   const font = anchor.font
   
-  tooltip.style.top = `${Math.min(anchorRect.y, extentRect.y) - 32}px`;
+  tooltip.style.top = `${Math.min(anchorRect.y, extentRect.y) - 42}px`;
   tooltip.style.left = `${Math.min(anchorRect.x, extentRect.x) + (selection.anchorOffset + selection.extentOffset)*2}px`;
   // tooltip.style.opacity = 1;
 

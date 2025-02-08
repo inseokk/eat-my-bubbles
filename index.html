@@ -14,6 +14,7 @@
   <script src="pdf-render.js" defer></script>
   <script src="topbar.js" defer></script>
   <script src="right_side_bar.js" defer></script>
+  <script src="tooltip.js" defer></script>
   <script src="ai.js"></script>
 
   <!-- Google Fonts -->
@@ -31,9 +32,9 @@
 
 <body>
   <div id="highlight-bar" class="tooltip" style="opacity: 0">
-    <button name="highlight-icons"><i class="material-icons">chat</i></button>
-    <button name="highlight-icons"><i class="material-icons">content_copy</i></button>
-    <button name="highlight-icons"><i class="material-icons">south_east</i></button>
+    <button id="explain" name="highlight-icons"><i class="material-icons">chat</i></button>
+    <button id="copy" name="highlight-icons"><i class="material-icons">content_copy</i></button>
+    <button id="paste" name="highlight-icons"><i class="material-icons">south_east</i></button>
   </div>
 
   <div class="navbar">
@@ -129,7 +130,7 @@
       <div class="chat-section" style="height: 250px">
         <div class="chat-header">
           <div class="logo"></div>
-          <div class="chat-title">Ask Bubbles</div>
+          <div class="chat-title">Ask aphrós</div>
         </div>
         <div class="chat-input-section">
           <div class="messages"></div>
@@ -216,7 +217,7 @@
       <div class="chat-section-fullscreen">
         <div class="chat-header-fullscreen">
           <img src="Bubbles.png" alt="Bubbles Logo" />
-          <h2>Ask Bubbles</h2>
+          <h2>Ask aphrós</h2>
         </div>
 
         <div class="chat-content">

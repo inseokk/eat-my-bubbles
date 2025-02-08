@@ -114,12 +114,15 @@ function submitMessage() {
   const message = input.value.trim();
   if (message) {
     console.log('Submitted:', message);
-    chatSection.style.height = `${MAX_CHAT}px`;
-    adjustChatInputSection(chatSection);
     createUserMessage(message);
     askAI(message).then(createAIMessage);
     input.value = '';
   }
+}
+
+function expandChat() {
+  chatSection.style.height = `${MAX_CHAT}px`;
+  adjustChatInputSection(chatSection);
 }
 
 function createUserMessage(message) {
