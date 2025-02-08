@@ -4,23 +4,19 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="module">
-    import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.10.38/+esm'
-  </script>
-  <script type="module">
-    import pdf2html from 'https://cdn.jsdelivr.net/npm/pdf2html@3.1.0/index.js'
-  </script>
-  <script src="https://cdn.jsdelivr.net/npm/pdf-lib/dist/pdf-lib.min.js"></script>
+  <!-- Import PDF.js from Mozilla -->
+  <script src="pdf.min.js"></script>
+  <script src="pdf.worker.min.js"></script>
 
-  <script src="pdf-test.js" defer></script>
+  <!-- Our JavaScript Files -->
   <script src="pdf-render.js" defer></script>
 
+  <!-- Stylesheets -->
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="pdf_viewer.css">
   <title>Test</title>
 </head>
 <body>
-  <button onclick="createPdf()">Create PDF</button>
-  <!-- <embed id="pdf" src="" width="500" height="600" type="application/pdf"> -->
-  <canvas id="canvas" width="500" height="600"></canvas>
+  <div id="pages"></div>
 </body>
 </html>
