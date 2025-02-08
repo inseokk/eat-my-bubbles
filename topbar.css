@@ -50,11 +50,24 @@ input[type="number"] {
   color: white;
 }
 
-.topbar button[name="highlight-icons"] {
+button[name="highlight-icons"] {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
   color: white;
   background-color: rgb(0, 55, 74);
   display: flex;
-  align-items: center;}
+  align-items: center;
+  transition: background-color 200ms ease;
+}
+
+button[name="highlight-icons"]:hover {
+  cursor: pointer;
+  background-color: rgb(3, 38, 64);
+}
 
 i {
   font-size: 16px !important;
