@@ -6,7 +6,7 @@
   color: black;
   background-color: #222;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
   font-family: "San Francisco", -apple-system, system-ui, sans-serif;
 }
 
@@ -49,4 +49,28 @@ button[name="image-icon"]{
   color: white;
   justify-content: center;
   padding-right: 10px;
+}
+
+.name, .links {
+  justify-self: flex-start;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  align-items: center;
+}
+
+.name {
+  margin-left: 12px;
+}
+
+.name img {
+  width: 40px;
+  height: 40px;
+}
+
+.logo {
+  background: url('Bubbles.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }
