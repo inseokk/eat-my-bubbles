@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Discussion Sidebar</title>
+    <link rel="stylesheet" href="right_side_bar.css">
+</head>
+<body>
+    <div class="sidebar">
+        <div class="header">
+            <h1>Discussion</h1>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M7 17L17 7M17 7H7M17 7V17"/>
+            </svg>
+        </div>
+        
+        <div class="filter">
+            Filter
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M6 9l6 6 6-6"/>
+            </svg>
+        </div>
+
+        <div class="discussion-list">
+            <div class="discussion-item">
+                <div class="discussion-title">Searching a Sorted Array</div>
+                <div class="discussion-preview">
+                    I noticed that the array example presented in the lecture had an array that was not sorted. Would running our search func... 
+                    <span class="read-more">Read More</span>
+                </div>
+                <div class="item-footer">
+                    <svg class="checkmark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span class="comment-count">3</span>
+                </div>
+            </div>
+            <!-- Repeated items for demonstration -->
+            <div class="discussion-item">
+                <div class="discussion-title">Searching a Sorted Array</div>
+                <div class="discussion-preview">
+                    I noticed that the array example presented in the lecture had an array that was not sorted. Would running our search func... 
+                    <span class="read-more">Read More</span>
+                </div>
+                <div class="item-footer">
+                    <svg class="checkmark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 6L9 17l-5-5"/>
+                    </svg>
+                    <span class="comment-count">3</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="chat-section">
+            <div class="chat-header">
+                <div class="logo"></div>
+                <div class="chat-title">Ask Verca</div>
+            </div>
+            <div class="chat-input-section">
+                <div class="action-buttons">
+                    <button class="action-button">Summarize</button>
+                    <button class="action-button">Explain key concepts</button>
+                    <button class="action-button">Relate to previous lecture</button>
+                </div>
+                <div class="input-container">
+                    <textarea class="chat-input" placeholder="start typing..."></textarea>
+                    <button class="submit-button">
+                        <svg class="arrow-icon" viewBox="0 0 24 24">
+                            <path d="M5 12h14M12 5l7 7-7 7" stroke="white" fill="none" stroke-width="2"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="right_side_bar.js"></script>
+</body>
+</html>
