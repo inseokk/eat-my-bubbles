@@ -281,3 +281,42 @@ chatInput.addEventListener('keypress', function(e) {
     sendMessage();
   }
 });
+
+// Function to update middle section content
+function updateMiddleSection(title, content) {
+  const conversationSelector = document.querySelector('.conversation-selector');
+  const emptyStateIcon = conversationSelector.querySelector('.empty-state-icon');
+  const emptyStateText = conversationSelector.querySelector('.empty-state-text');
+  
+  // Create new content container if it doesn't exist
+  let contentContainer = conversationSelector.querySelector('.selected-discussion-content');
+  if (!contentContainer) {
+    contentContainer = document.createElement('div');
+    contentContainer.className = 'selected-discussion-content';
+    conversationSelector.insertBefore(contentContainer, emptyStateText);
+  }
+  
+  // Update content
+  contentContainer.innerHTML = `
+    <h2 class="discussion-title text-xl font-medium mb-4">${title}</h2>
+    <div class="discussion-content">${content}</div>
+  `;
+  
+  // Hide empty state elements
+  emptyStateIcon.style.display = 'none';
+  emptyStateText.style.display = 'none';
+}
+
+// Handle discussion item clicks in fullscreen mode
+fullscreenDiscussionContent.addEventListener('click', function(e) {
+  const discussionItem = e.target.closest('.discussion-item');
+  if (discussionItem) {
+    const title = discussionItem.querySelector('.discussion-title').textContent;
+    const preview = discussionItem.querySelector('.discussion-preview').textContent;
+    
+    // Get full content (in a real application, you might fetch this from a database)
+    const fullContent = preview.replace('Read More', '').trim();
+    
+    updateMiddleSection(title, fullContent);
+  }
+});
