@@ -4,30 +4,67 @@ const { pdfjsLib } = globalThis;
 pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs/pdf.js/4.10.38/pdf.worker.min.mjs';
 
 var pdf;
+var pdfScale = 1;
+const MIN_SCALE = 0.1;
+const MAX_SCALE = 2.0;
+
+const pdfViewer = document.getElementById('pdf-viewer');
 const pages = document.getElementById('pages');
+const pageNumElem = document.getElementById('page-num');
 
 /* ZOOM FUNCTIONALITY */
 const zoomSlider = document.getElementById('zoom');
 zoomSlider.addEventListener('input', () => {
-  pages.style.setProperty('--scale-factor', zoomSlider.value);
+  pdfScale = zoomSlider.value;
+  pdfViewer.style.setProperty('--scale-factor', pdfScale);
+  updatePageNumber();
 });
 
-window.addEventListener('wheel', evt => {
+pdfViewer.addEventListener('wheel', evt => {
   const deltaMode = evt.deltaMode;
   let scaleFactor = Math.exp(-evt.deltaY / 100);
 
-  // evt.clientX, evt.clientY
-
   if (evt.ctrlKey) {
     evt.preventDefault();
-    
-    zoomSlider.value = clamp(zoomSlider.value * scaleFactor, 0.1, 2);
-    pages.style.setProperty('--scale-factor', zoomSlider.value);
+    zoom(scaleFactor, pdfViewer.scrollLeft + evt.clientX, pdfViewer.scrollTop + evt.clientY);
   }
+  
+  updatePageNumber();
 }, {passive: false});
+
+function zoom(scale, originX, originY) {
+  pdfScale *= scale;
+  if (pdfScale >= MIN_SCALE && pdfScale <= MAX_SCALE) {
+    pdfViewer.style.setProperty('--scale-factor', pdfScale);
+    pdfViewer.scrollTop -= originY * (1-scale);
+  } else {
+    pdfScale = clamp(pdfScale, MIN_SCALE, MAX_SCALE);
+  }
+  zoomSlider.value = pdfScale;
+}
 
 function clamp(x, min, max) {
   return Math.max(min, Math.min(max, x));
+}
+
+function updatePageNumber() {
+  pageNumElem.innerText = `[${getPageNumber()} / ${pdf.numPages}]`;
+}
+
+function getPageNumber() {
+  let bestPage = 0;
+  let bestPagePos = null;
+  
+  pages.childNodes.forEach((page, i) => {
+    const rect = page.getClientRects()[0];
+    const position = Math.abs(2 * rect.y + rect.height - pdfViewer.clientHeight);
+    if (!bestPagePos || position < bestPagePos) {
+      bestPage = i;
+      bestPagePos = position;
+    }
+  });
+
+  return bestPage + 1;
 }
 
 displayPDF('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf');

@@ -5,15 +5,21 @@
 html, body {
   margin: 0;
   padding: 0;
-  background-color: #444;
 }
 
-body {
+#pdf-viewer {
   padding: 8px; /* Temporary */
+  background-color: #444;
+  width: 100vw;
+  height: 100vh;
+  overflow: auto;
 }
 
-input[type="range"] {
+.fixed {
   position: fixed;
+  top: 8px;
+  left: 8px;
+  z-index: 99;
 }
 
 #pages {
