@@ -5,6 +5,11 @@ pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdnjs.cloudflare.com/ajax/libs
 
 const pages = document.getElementById('pages');
 
+const zoomSlider = document.getElementById('zoom');
+zoomSlider.addEventListener('input', () => {
+  pages.style.setProperty('--scale-factor', zoomSlider.value);
+});
+
 displayPDF('https://raw.githubusercontent.com/mozilla/pdf.js/ba2edeae/web/compressed.tracemonkey-pldi-09.pdf');
 
 function displayPDF(url) {
@@ -12,7 +17,7 @@ function displayPDF(url) {
   loadingTask.promise.then(pdf => {
     for (let pageNumber = 1; pageNumber <= pdf.numPages; pageNumber++) {
       pdf.getPage(pageNumber).then(page => {
-        console.log('Page', pageNumber, 'loading');
+        // console.log('Page', pageNumber, 'loading');
 
         // Create HTML element
         const pageElem = document.createElement('div');
@@ -35,8 +40,8 @@ function displayPDF(url) {
   
         canvas.width = Math.floor(viewport.width * outputScale);
         canvas.height = Math.floor(viewport.height * outputScale);
-        canvas.style.width = Math.floor(viewport.width) + "px";
-        canvas.style.height =  Math.floor(viewport.height) + "px";
+        canvas.style.width = `calc(var(--scale-factor) * ${Math.floor(viewport.width)}px`;
+        canvas.style.height = `calc(var(--scale-factor) * ${Math.floor(viewport.height)}px`;
   
         const transform = outputScale !== 1
           ? [outputScale, 0, 0, outputScale, 0, 0]
@@ -49,14 +54,14 @@ function displayPDF(url) {
           viewport: viewport
         };
         const renderTask = page.render(renderContext);
-        renderTask.promise.then(() => {
-          console.log('Page', pageNumber, 'rendered');
-        });
+        // renderTask.promise.then(() => {
+        //   console.log('Page', pageNumber, 'rendered');
+        // });
         
         page.getTextContent().then(textContent => {
           textLayerElem.setAttribute('class', 'textLayer');
           const textLayer =  pdfjsLib.renderTextLayer({
-            textContent: textContent,
+            textContentSource: textContent,
             container: textLayerElem,
             viewport: viewport
           });
