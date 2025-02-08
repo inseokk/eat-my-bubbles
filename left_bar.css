@@ -1,13 +1,38 @@
-/* Container for the left bar */
+/* Left Bar Container */
 .left-bar {
-  width: 150px;
-  height: 100vh; /* Extend the bar to full page height */
+  width: 125px;               /* Normal width */
+  height: 100vh;              /* Full viewport height */
   background-color: #f7f7f7;
   border-right: 1px solid #ccc;
-  padding: 20px;
+  padding: 10px;
   box-sizing: border-box;
   font-family: sans-serif;
-  position: relative; /* Needed for absolute positioning of button group */
+  position: relative;
+  transition: width 0.3s ease;  /* Smooth transition when minimizing/restoring */
+}
+
+/* Collapsed state: minimized left bar */
+.left-bar.collapsed {
+  width: 40px;                /* Minimized width (adjust as needed) */
+}
+
+/* Collapse Button Styling */
+.collapse-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 1100;
+  background-color: #00374A;
+  color: #ffffff;
+  border: none;
+  padding: 4px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.collapse-button:hover {
+  background-color: #014b63;
 }
 
 /* Container for the button group */
@@ -15,27 +40,40 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);  /* Centers the container vertically and horizontally */
+  transform: translate(-50%, -50%);
   display: flex;
   flex-direction: column;
-  gap: 30px;  /* Space between buttons */
+  gap: 10px;
 }
 
-/* --- Updated Button Styles for Square Icon Buttons --- */
-
-/* Base styling for icon buttons */
+/* Base styling for all buttons in the left bar */
 .left-bar button {
   display: inline-flex;
   justify-content: center;
   align-items: center;
-  width: 60px;  /* Fixed square width */
-  height: 60px; /* Fixed square height */
+  width: 60px;
+  height: 60px;
   border: none;
-  border-radius: 8px; /* Rounded corners for a softer look */
+  border-radius: 8px;
+  background-color: #00374A;
+  color: #ffffff;
   cursor: pointer;
   transition: background-color 0.3s ease;
-  background: none;
-  padding: 0;
+}
+
+.left-bar button:hover {
+  background-color: #014b63;
+}
+
+/* Styling for Material Symbols Outlined icons inside buttons */
+.material-symbols-outlined {
+  font-size: 24px;
+  line-height: 60px; /* Centers icon vertically within the 60px-high button */
+}
+
+/* (Optional) Page Navigation Styling */
+.page-navigation {
+  margin-top: 20px;
 }
 
 /* Search Button Styling */
@@ -47,34 +85,52 @@
   background-color: #014b63;
 }
 
-/* Insert search icon - using Font Awesome's search icon (fa-search) */
+/* Insert search icon using Google Material Symbols Outlined */
 .left-bar .search-button::before {
-  content: "\f002";  /* Font Awesome Unicode for search icon */
-  font-family: "Font Awesome 5 Free"; /* Ensure this matches your Font Awesome version */
-  font-weight: 900; /* Use the solid style */
-  font-size: 20px;
+  content: "search";  
+  font-family: "Material Symbols Outlined";
+  font-size: 40px;
   color: #ffffff;
+  display: inline-block;
 }
 
-/* History Button Styling */
-.left-bar .history-button {
+/* home Button Styling */
+.left-bar .home-button {
   background-color: #00374A;
 }
 
-.left-bar .history-button:hover {
+.left-bar .home-button:hover {
   background-color: #014b63;
 }
 
-/* Insert history icon - using Font Awesome's history icon (fa-history) */
-.left-bar .history-button::before {
-  content: "\f1da";  /* Font Awesome Unicode for history icon */
-  font-family: "Font Awesome 5 Free";
+/* Insert home icon */
+.left-bar .home-button::before {
+  content: "home";  
+  font-family: "Material Symbols Outlined";
   font-weight: 900;
-  font-size: 20px;
+  font-size: 40px;
   color: #ffffff;
+  display: inline-block;
 }
 
-/* Settings Button Styling (New Button) */
+.left-bar .view-button {
+  background-color: #00374A;
+}
+
+.left-bar .view-button:hover {
+  background-color: #014b63;  /* Slightly darker on hover */
+}
+
+.left-bar .view-button::before {
+  content: "view_agenda";
+  font-family: "Material Symbols Outlined";
+  font-weight: 900;
+  font-size: 40px;
+  color: #ffffff;
+  display: inline-block;
+}
+
+/* Settings Button Styling */
 .left-bar .settings-button {
   background-color: #00374A;
 }
@@ -83,13 +139,14 @@
   background-color: #014b63;  /* Slightly darker on hover */
 }
 
-/* Insert settings icon - using Font Awesome's cog icon (fa-cog) */
+/* Insert settings icon */
 .left-bar .settings-button::before {
-  content: "\f013";  /* Font Awesome Unicode for cog icon */
-  font-family: "Font Awesome 5 Free";
+  content: "settings";  /* Use lowercase to match Material Symbols */
+  font-family: "Material Symbols Outlined";
   font-weight: 900;
-  font-size: 20px;
+  font-size: 40px;
   color: #ffffff;
+  display: inline-block;
 }
 
 /* --- End of Updated Button Styles --- */
