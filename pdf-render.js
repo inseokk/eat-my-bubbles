@@ -11,6 +11,7 @@ const MAX_SCALE = 2.0;
 const pdfViewer = document.getElementById('pdf-viewer');
 const pages = document.getElementById('pages');
 const pageNumElem = document.getElementById('page-num');
+const tooltip = document.querySelector('.tooltip');
 
 /* ZOOM FUNCTIONALITY */
 const zoomSlider = document.getElementById('zoom');
@@ -20,15 +21,71 @@ zoomSlider.addEventListener('input', () => {
   updatePageNumber();
 });
 
+/* TEMPORARY SOLUTION: */
+var mousedownEvt = null;
+
+pdfViewer.addEventListener('mousedown', evt => {
+  mousedownEvt = evt;
+});
+
+pdfViewer.addEventListener('click', evt => {
+  // console.log(evt);
+
+  if (document.getSelection().toString()) {
+    tooltip.style.opacity = 1;
+  }
+
+  if (evt.clientX != mousedownEvt.clientX || evt.clientY != mousedownEvt.clientY) return;
+
+  // Find clicked page
+  const page = [...pages.childNodes].find(page => page.contains(evt.target));
+  const rect = page.getClientRects()[0];
+  const x = evt.clientX - rect.x;
+  const y = evt.clientY - rect.y;
+
+  // Create comment dot
+  const dot = document.createElement('div');
+  dot.classList.add('dot');
+  dot.style.left = `${x}px`;
+  dot.style.top = `${y}px`;
+  page.querySelector('.annotations').appendChild(dot);
+});
+
+document.addEventListener('selectionchange', evt => {
+  const selection = document.getSelection();
+  // console.log(selection);
+  const text = selection.toString().replaceAll('\n', '');
+  const anchor = selection.anchorNode.parentElement;
+  const anchorRect = anchor.getClientRects()[0];
+  const extent = selection.extentNode.parentElement;
+  const extentRect = extent.getClientRects()[0];
+  const page = [...pages.childNodes].find(page => page.contains(anchor));
+  const pageRect = page.getClientRects()[0];
+  const x = Math.min(anchorRect.x, extentRect.x) - pageRect.x;
+  const y = Math.min(anchorRect.y, extentRect.y) - pageRect.y;
+  
+  tooltip.style.top = `${Math.min(anchorRect.y, extentRect.y) - 32}px`;
+  tooltip.style.left = `${Math.min(anchorRect.x, extentRect.x) + (selection.anchorOffset + selection.extentOffset)*2}px`;
+  tooltip.innerText = text;
+  // tooltip.style.opacity = 1;
+
+  // console.log('Selected text:', selectedText);
+});
+
 pdfViewer.addEventListener('wheel', evt => {
   const deltaMode = evt.deltaMode;
   let scaleFactor = Math.exp(-evt.deltaY / 100);
 
   if (evt.ctrlKey) {
+    /* Zooming functionality */
     evt.preventDefault();
     zoom(scaleFactor, pdfViewer.scrollLeft + evt.clientX, pdfViewer.scrollTop + evt.clientY);
+  } else {
+    /* Scrolling functionality */
+    tooltip.style.opacity = 0;
+    tooltip.style.top = `calc(${tooltip.style.top} - ${evt.deltaY}px)`;
   }
-  
+
   updatePageNumber();
 }, {passive: false});
 
@@ -85,8 +142,11 @@ function displayPDF(url) {
         canvas.height = 600;
         const textLayerElem = document.createElement('div');
         textLayerElem.classList.add('text-layer');
+        const annotationsElem = document.createElement('div');
+        annotationsElem.classList.add('annotations');
         pageElem.appendChild(canvas);
         pageElem.appendChild(textLayerElem);
+        pageElem.appendChild(annotationsElem);
         pages.appendChild(pageElem);
   
         const scale = 1;
