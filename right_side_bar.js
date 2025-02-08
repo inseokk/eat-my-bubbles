@@ -250,12 +250,84 @@ function exitFullscreen() {
 expandButton.addEventListener('click', enterFullscreen);
 closeButton.addEventListener('click', exitFullscreen);
 
+// Handle post submission
+function submitPost() {
+  const titleInput = document.querySelector('.title-input');
+  const discussionTextarea = document.querySelector('.discussion-textarea');
+  const selectedTags = [];
+  
+  // Get selected tags
+  document.querySelectorAll('.tag-btn').forEach(tagBtn => {
+    if (tagBtn.classList.contains('selected')) {
+      selectedTags.push(tagBtn.textContent);
+    }
+  });
+  
+  const postData = {
+    title: titleInput.value.trim(),
+    content: discussionTextarea.value.trim(),
+    tags: selectedTags
+  };
+  
+  if (postData.title && postData.content) {
+    console.log('Post submitted:', postData);
+    
+    // Clear form
+    titleInput.value = '';
+    discussionTextarea.value = '';
+    document.querySelectorAll('.tag-btn').forEach(btn => btn.classList.remove('selected'));
+    
+    // Here you would typically send the data to your backend
+    createDiscussionItem(postData);
+  } else {
+    alert('Please fill in both title and content before posting.');
+  }
+}
+
+// Create new discussion item from submitted data
+function createDiscussionItem(postData) {
+  const discussionItem = document.createElement('div');
+  discussionItem.className = 'discussion-item';
+  discussionItem.innerHTML = `
+    <div class="discussion-title">${postData.title}</div>
+    <div class="discussion-preview">
+      ${postData.content.substring(0, 100)}... 
+      <span class="read-more">Read More</span>
+    </div>
+    <div class="item-footer">
+      <svg class="checkmark" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M20 6L9 17l-5-5"/>
+      </svg>
+      <span class="comment-count">0</span>
+    </div>
+  `;
+  
+  // Add to both sidebar and fullscreen discussion lists
+  document.querySelector('.discussion-list').prepend(discussionItem);
+  document.querySelector('.discussion-content').prepend(discussionItem.cloneNode(true));
+}
+
+// Add click event for post button
+document.querySelector('.post-btn').addEventListener('click', submitPost);
+
+// Add click events for tag buttons to toggle selection
+document.querySelectorAll('.tag-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    btn.classList.toggle('selected');
+  });
+});
+
 // Handle discussion item clicks in fullscreen mode
 fullscreenDiscussionContent.addEventListener('click', function(e) {
   const discussionItem = e.target.closest('.discussion-item');
   if (discussionItem) {
-    // Handle discussion item click
-    console.log('Discussion item clicked in fullscreen mode');
+    const title = discussionItem.querySelector('.discussion-title').textContent;
+    const preview = discussionItem.querySelector('.discussion-preview').textContent;
+    
+    // Get full content (in a real application, you might fetch this from a database)
+    const fullContent = preview.replace('Read More', '').trim();
+    
+    updateMiddleSection(title, fullContent);
   }
 });
 
