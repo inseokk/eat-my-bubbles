@@ -508,6 +508,24 @@
   display: block;
 }
 
+.selected-discussion-content {
+  width: 100%;
+  max-width: 800px;
+  padding: 24px;
+  margin: 0 auto;
+}
+
+.selected-discussion-content .discussion-title {
+  color: #1a1a1a;
+  margin-bottom: 16px;
+}
+
+.selected-discussion-content .discussion-content {
+  color: #333;
+  line-height: 1.6;
+  font-size: 16px;
+}
+
 /* Top section */
 .discussion-header {
   padding: 24px;
