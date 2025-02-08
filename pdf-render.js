@@ -31,7 +31,7 @@ pdfViewer.addEventListener('mousedown', evt => {
 pdfViewer.addEventListener('click', evt => {
   // console.log(evt);
 
-  if (document.getSelection().toString()) {
+  if (document.getSelection().toString().length > 0) {
     tooltip.style.opacity = 1;
   }
 
