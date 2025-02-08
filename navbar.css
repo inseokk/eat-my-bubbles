@@ -31,6 +31,22 @@
   color: white;
 }
 
+button[name="image-icon"]{
+  background-color: rgb(55, 55, 55);
+  color: white;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+button[name="image-icon"]{
+  background-color: rgb(55, 55, 55);
+  color: white;
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
 .navbar button[name="last-icon"] {
   background-color: rgb(55, 55, 55);
   color: white;
