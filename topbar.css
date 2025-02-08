@@ -1,0 +1,34 @@
+/* Added style for a smaller number input textbox */
+#toolbar {
+  display: flex;
+  gap: 15px;
+  color: black;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: rgb(113, 113, 113); /* adjust background color as needed */
+  z-index: 1000; /* ensures the toolbar stays above other elements */
+  align-items: center;
+  justify-content: center;
+  font-family: "San Francisco", -apple-system, system-ui, sans-serif;
+}
+
+input[type="number"] {
+  width: 20px;       /* adjust width as needed */
+  padding: 5px;      /* adjust padding as needed */
+  font-size: 14px;   /* adjust font size as needed */
+  margin-left: 40px; /* added space between input and button */
+}
+
+button {
+  padding: 5px 10px;
+  font-size: 16px;
+  border: none;            /* remove default border */
+  border-radius: 50%;      /* round button shape */
+  width: 20px;             /* fixed width for circular shape */
+  height: 20px;            /* fixed height for circular shape */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
