@@ -1,34 +1,53 @@
 /* Added style for a smaller number input textbox */
 #toolbar {
   display: flex;
+  width: 100%;
+  height: 50px;
   gap: 15px;
   color: black;
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
-  background-color: rgb(113, 113, 113); /* adjust background color as needed */
+  background-color: rgb(51, 51, 51); /* adjust background color as needed */
   z-index: 1000; /* ensures the toolbar stays above other elements */
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   font-family: "San Francisco", -apple-system, system-ui, sans-serif;
 }
 
 input[type="number"] {
-  width: 20px;       /* adjust width as needed */
-  padding: 5px;      /* adjust padding as needed */
-  font-size: 14px;   /* adjust font size as needed */
-  margin-left: 40px; /* added space between input and button */
+  width: 10px;
+  height: 10px;
+  padding: 5px;
+  font-size: 14px;
+  margin-left: 40px;
 }
 
 button {
   padding: 5px 10px;
   font-size: 16px;
-  border: none;            /* remove default border */
-  border-radius: 50%;      /* round button shape */
-  width: 20px;             /* fixed width for circular shape */
-  height: 20px;            /* fixed height for circular shape */
+  border: none;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
   display: flex;
+  align-items: center;
+  justify-content: center;
+}
+button[name="icons"]{
+  background-color: rgb(55, 55, 55);
+  color: white;
+}
+
+p {
+  color: white;
+  align-items: center;
+  justify-content: center;
+}
+
+p[name="totalPages"] {
+  margin-right: 20px;
   align-items: center;
   justify-content: center;
 }
