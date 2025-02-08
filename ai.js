@@ -3,18 +3,10 @@ function random(min, max) {
 }
 
 function askAI(message) {
-  return new Promise(res => {
-    setTimeout(() => {
-      res('Pretend this is the response you get from OpenAI <3');
-    }, random(500, 2000));
-  });
-}
-
-function OpenaiFetchAPI() {
-  console.log("Calling GPT3");
+  console.log("Fetching GPT-4o Response...");
   var url = "https://api.openai.com/v1/chat/completions";
   var bearer = 'Bearer ' + OPENAI_API_KEY
-  fetch(url, {
+  return fetch(url, {
     method: 'POST',
     headers: {
       'Authorization': bearer,
@@ -29,6 +21,15 @@ function OpenaiFetchAPI() {
             {
               "type": "text",
               "text": "You are a helpful assistant for a PDF editor app named Bubbles. Your responses are as helpful and education while not violating any academic dishonesty. Be extra friendly; ask if any more information can be given. At the end of every response, say \\\"Eat my bubbles!\\\""
+            }
+          ]
+        },
+        {
+          "role": "user",
+          "content": [
+            {
+              "type": "text",
+              "text": message
             }
           ]
         }
@@ -48,6 +49,7 @@ function OpenaiFetchAPI() {
     console.dir(data, {depth: null});
     console.log(Object.keys(data));
     console.log(data.choices[0].message.content);
+    return data.choices[0].message.content;
   })
   .catch(error => {
     console.error('Error using OpenAI fetch call:', error)

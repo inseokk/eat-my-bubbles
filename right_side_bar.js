@@ -127,6 +127,7 @@ function createUserMessage(message) {
   elem.classList.add('user-message');
   elem.innerText = message;
   messages.appendChild(elem);
+  messages.scrollTo(0, messages.scrollHeight);
 }
 
 function createAIMessage(message) {
@@ -134,6 +135,7 @@ function createAIMessage(message) {
   elem.classList.add('ai-message');
   elem.innerHTML = `<div class="logo"></div><div class="ai-message-content">${message}</div>`;
   messages.appendChild(elem);
+  messages.scrollTo(0, messages.scrollHeight);
 }
 
 // Handle chat input submission with button
