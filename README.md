@@ -1,2 +1,3 @@
-# eat-my-bubbles
-bubble bubble
+# Eat My Bubbles 🫧🫧🫧
+
+EdTech PDF editor with AI assistants
